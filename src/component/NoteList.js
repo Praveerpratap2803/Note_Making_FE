@@ -34,12 +34,28 @@ function NoteList(){
     let addClicked = ()=>{
         navigate('/addNote')
     }
+    let getAllFavoriteNotesByUserId = ()=>{
+      console.log()
+      let userId='1';
+      axios.get(`http://localhost:3000/getAllFavoriteNotesByUserId/${userId}`).then((res)=>{
+        console.log(res.data.data);
+        setNote(res.data.data)
+      })
+    }
+    let changedSelect = (e)=>{
+      console.log(e.target.value);
+      e.target.value==='1'?getAllNotesByUserId():getAllFavoriteNotesByUserId()
+    }
     return (
         <>
-            {/* <Link to="/addNote">Add Note</Link> */}
             <button onClick={()=>{addClicked()}}>Add Note</button>
+            <select onChange={(e)=>{changedSelect(e)}}>
+              <option selected >Open this select menu</option>
+              <option value="1">All Notes</option>
+              <option value="2">Favorite Notes</option>
+            </select>
             {notes.map((card)=>
-                <NoteCard key={card.id} cardData={card} delete={deletedId} edit={editFun}/>
+                <NoteCard key={card.id} cardData={card} delete={deletedId} edit={editFun} />
             )}
         </>
     )
