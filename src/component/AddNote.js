@@ -9,7 +9,7 @@ function AddNote() {
     let [message,setMessage]=useState({})
   const navigate = useNavigate();
   let clickedCancel = () => {
-    navigate("/");
+    navigate("/list");
   };
   let onFormSubmitted = (event) => {
     event.preventDefault();
@@ -25,7 +25,7 @@ function AddNote() {
     axios.post(`http://localhost:3000/createNote`,body).then((res)=>{
         console.log(res.body);
         alert("note created successfully")
-        navigate("/");
+        navigate("/list");
     }).catch((error)=>{
         alert(error)
     })

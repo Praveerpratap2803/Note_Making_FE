@@ -50,11 +50,11 @@ function EditNote(){
         axios.put(`http://localhost:3000/updateNote`,body).then((res)=>{
             console.log(res)
             alert(res.data.data.note_message);
-            navigate("/");
+            navigate("/list");
         })
     }
     let clickedCancelEdit = () =>{
-        navigate('/')
+        navigate('/list')
     }
     return (
         <>
