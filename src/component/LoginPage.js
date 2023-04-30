@@ -12,6 +12,7 @@ function LoginPage(){
             password:e.target.password.value
         }
         console.log(formData)
+        try{
         axios.post(`http://localhost:3000/login`,formData).then((res)=>{
             console.log(res.data);
             console.log(res.status);
@@ -22,9 +23,13 @@ function LoginPage(){
                 DataService.setData(res.data.data.id);
                 navigate('/list')
             }else{
+                console.log("in else")
                 alert("Enter Correct username and password")
             }
         })
+        }catch(error){
+            alert(error)
+        }
     }
     return (
         <form action="" onSubmit={formSubmitted}>

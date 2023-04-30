@@ -2,8 +2,10 @@ import axios from "axios"
 import {useState,useEffect} from 'react';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
+import DataService from "./userId";
 
 function EditNote(){
+    let user_id = DataService.getData();
     const location = useLocation();
     const navigate = useNavigate();
     console.log(location.pathname)
@@ -45,7 +47,7 @@ function EditNote(){
         let body = {
             note_message:e.target[0].value,
             "id":id,
-            "user_id":"1"
+            "user_id":user_id
         }
         axios.put(`http://localhost:3000/updateNote`,body).then((res)=>{
             console.log(res)

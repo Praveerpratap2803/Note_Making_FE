@@ -3,10 +3,11 @@
 import { useNavigate } from "react-router-dom";
 import {useState} from 'react';
 import axios from "axios";
+import DataService from "./userId";
 
 function AddNote() {
-
-    let [message,setMessage]=useState({})
+  let user_id=DataService.getData()
+  let [message,setMessage]=useState({})
   const navigate = useNavigate();
   let clickedCancel = () => {
     navigate("/list");
@@ -16,7 +17,7 @@ function AddNote() {
     console.log(event.target[0].value);
     setMessage({note_message:event.target[0].value});
     console.log("body for api",message)
-    let dataForApi = {...message,user_id:'1'}
+    let dataForApi = {...message,user_id:user_id}
     console.log(dataForApi)
     createNote(dataForApi)
   };
