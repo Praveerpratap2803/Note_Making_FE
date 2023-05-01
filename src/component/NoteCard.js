@@ -129,7 +129,7 @@ function NoteCard(props){
         axios.post(`http://localhost:3000/createPriority`,body).then((res)=>{
             console.log(res.data.data);
             setPriorityValue(res.data.data.priority);
-            
+            getLastFivePrioritiesByNoteId();
         })
     }
     let changedPriority = (e)=>{
@@ -137,7 +137,7 @@ function NoteCard(props){
     }
     return (
         <>
-            <div style={{border:"2px solid black",margin:"2px",padding:"4px", display: "flex",flexDirection: "column",gap: "10px"}}>
+            <div style={{border:"2px solid black",margin:"2px",padding:"4px", display: "flex",flexDirection: "column",gap: "10px",backgroundColor:'lightblue'}}>
                 <div>Message -: {cardData.note_message}</div>
                 <div style={{display:'flex',gap:"3px"}}>
                     <button onClick={()=>deleteFun(cardData.id)}>Delete</button>
