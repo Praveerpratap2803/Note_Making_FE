@@ -1,8 +1,12 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import DataService from "./userId";
+// import jwt from 'jsonwebtoken';
+
 function LoginPage(){
     let navigate = useNavigate();
+    let [token,setToken]  = useState('');
     let formSubmitted = (e)=>{
         e.preventDefault();
         // console.log(e.target.username.value);
@@ -21,6 +25,11 @@ function LoginPage(){
                 //props.userId(res.data.id)
                 console.log(res.data.data.id)
                 DataService.setData(res.data.data.id);
+                token = res.data.data.token
+                setToken(token)
+                localStorage.setItem('token',token);
+                // let user = jwt.verify(token,'praveer');
+                // console.log(user);
                 navigate('/list')
             }else{
                 console.log("in else")

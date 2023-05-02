@@ -123,10 +123,15 @@ function NoteCard(props){
         let priorityValue = new Number(e.target.priority.value);
         let body = {
             note_id:cardData.id,
-            priority:priorityValue
+            priority:priorityValue,
+            user_id:DataService.getData()
         }
         console.log(body);
         axios.post(`http://localhost:3000/createPriority`,body).then((res)=>{
+            if(!res.data.data){
+                alert(res.data.message)
+                return
+            }
             console.log(res.data.data);
             setPriorityValue(res.data.data.priority);
             getLastFivePrioritiesByNoteId();
