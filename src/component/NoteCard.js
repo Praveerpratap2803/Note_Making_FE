@@ -120,7 +120,8 @@ function NoteCard(props){
         e.preventDefault();
         console.log(e);
         console.log(e.target.priority.value);
-        let priorityValue = new Number(e.target.priority.value);
+        // let priorityValue = new Number(e.target.priority.value);
+        let priorityValue = parseInt(e.target.priority.value);
         let body = {
             note_id:cardData.id,
             priority:priorityValue,

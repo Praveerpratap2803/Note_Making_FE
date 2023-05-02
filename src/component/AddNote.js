@@ -23,7 +23,11 @@ function AddNote() {
   };
   let createNote = (body)=>{
     console.log(body)
-    axios.post(`http://localhost:3000/createNote`,body).then((res)=>{
+    let header = {
+      'Authorization': localStorage.getItem("token")
+    }
+    console.log(header)
+    axios.post(`http://localhost:3000/createNote`,body,{headers:header}).then((res)=>{
         console.log(res.body);
         alert("note created successfully")
         navigate("/list");
