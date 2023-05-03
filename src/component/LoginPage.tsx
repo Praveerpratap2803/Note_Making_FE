@@ -9,14 +9,14 @@ interface loginRes{
         "id": string,
         "username": string,
         "password": string,
-        "first_name": string,
-        "last_name": string,
-        "created_by": string,
+        "first_name": string|null,
+        "last_name": string|null,
+        "created_by": string|null,
         "created_on": string,
-        "modified_by": string,
-        "modified_on": string,
-        "deleted_by": string,
-        "deleted_on": string
+        "modified_by": string|null,
+        "modified_on": string|null,
+        "deleted_by": string|null,
+        "deleted_on": string|null
     }
 }
 function LoginPage(){

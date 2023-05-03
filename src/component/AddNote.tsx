@@ -12,17 +12,17 @@ interface IAddRes{
       "id": string,
       "note_message": string,
       "favorite": string,
-      "start_date": null,
-      "end_date": null,
+      "start_date": null|string,
+      "end_date": null|string,
       "count_edit": number,
       "count_priority": number,
       "user_id": string,
-      "created_by": null,
+      "created_by": null|string,
       "created_on": string,
-      "modified_by": null,
+      "modified_by": null|string,
       "modified_on": string,
-      "deleted_by": null,
-      "deleted_on": null
+      "deleted_by": null|string,
+      "deleted_on": null|string
   }
 }
 function AddNote(){

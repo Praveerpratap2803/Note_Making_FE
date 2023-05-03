@@ -24,15 +24,15 @@ interface IUpdateNote{
         "id": string,
         "note_message": string,
         "favorite": string,
-        "start_date": string,
-        "end_date": string,
+        "start_date": string|null,
+        "end_date": string|null,
         "count_edit": number,
         "count_priority": number,
         "user_id": string,
         "created_by": null|string,
         "created_on": string,
         "modified_by": null|string,
-        "modified_on": string,
+        "modified_on": string|null,
         "deleted_by": null|string,
         "deleted_on": null|string
     }
