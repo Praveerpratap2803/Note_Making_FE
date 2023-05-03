@@ -1,8 +1,24 @@
 import { ChangeEvent, FormEvent, useState} from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import axios, {  AxiosResponse } from "axios";
 import DataService from "./userid";
-
+interface loginRes{
+    "message": string,
+    "data": {
+        "token": string,
+        "id": string,
+        "username": string,
+        "password": string,
+        "first_name": string,
+        "last_name": string,
+        "created_by": string,
+        "created_on": string,
+        "modified_by": string,
+        "modified_on": string,
+        "deleted_by": string,
+        "deleted_on": string
+    }
+}
 function LoginPage(){
     let navigate = useNavigate()
     let [formData,setFormData] = useState({username:'',password:''})
@@ -10,7 +26,7 @@ function LoginPage(){
         e.preventDefault()
         console.log(formData);
         try{
-            axios.post(`http://localhost:3000/login`,formData).then((res)=>{
+            axios.post(`http://localhost:3000/login`,formData).then((res:AxiosResponse<loginRes>)=>{
                 console.log(res.data.data.id);
                 if(res.status===200){
                     DataService.setData(res.data.data.id);

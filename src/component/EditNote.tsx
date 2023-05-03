@@ -1,9 +1,42 @@
-import axios from "axios"
+import axios, { AxiosResponse } from "axios"
 import {useState,useEffect, ChangeEvent, FormEvent} from 'react';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import DataService from "./userid";
-
+interface IGetNoteByIdRes{
+    "message": string,
+    "data": {
+        "id": string,
+        "note_message": string,
+        "favorite": string,
+        "user_id": string,
+        "created_by": null|string,
+        "created_on": string,
+        "modified_by": null|string,
+        "modified_on": string,
+        "deleted_by": null|string,
+        "deleted_on": null|string
+    }
+}
+interface IUpdateNote{
+    "message": "Note updated successfully",
+    "data": {
+        "id": string,
+        "note_message": string,
+        "favorite": string,
+        "start_date": string,
+        "end_date": string,
+        "count_edit": number,
+        "count_priority": number,
+        "user_id": string,
+        "created_by": null|string,
+        "created_on": string,
+        "modified_by": null|string,
+        "modified_on": string,
+        "deleted_by": null|string,
+        "deleted_on": null|string
+    }
+}
 function EditNote(){
     let user_id = DataService.getData();
     const location = useLocation();
@@ -13,7 +46,7 @@ function EditNote(){
     let [message,setMessage]=useState({note_message:""});
 
     let getNoteById = async()=>{
-        axios.get(`http://localhost:3000/getNoteById/${id}`).then((res)=>{
+        axios.get(`http://localhost:3000/getNoteById/${id}`).then((res:AxiosResponse<IGetNoteByIdRes>)=>{
             console.log(res.data.data)
             let {note_message} = res.data.data
             console.log(note_message)
@@ -44,7 +77,7 @@ function EditNote(){
             "id":id,
             "user_id":user_id
         }
-        axios.put(`http://localhost:3000/updateNote`,body).then((res)=>{
+        axios.put(`http://localhost:3000/updateNote`,body).then((res:AxiosResponse<IUpdateNote>)=>{
             console.log(res)
             alert(res.data.data.note_message);
             navigate("/list");

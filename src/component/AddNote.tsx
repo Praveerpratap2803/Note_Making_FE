@@ -1,10 +1,29 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DataService from "./userid";
 interface IAddNote{
     user_id: string;
     note_message: string;
+}
+interface IAddRes{
+  "message": string,
+  "data": {
+      "id": string,
+      "note_message": string,
+      "favorite": string,
+      "start_date": null,
+      "end_date": null,
+      "count_edit": number,
+      "count_priority": number,
+      "user_id": string,
+      "created_by": null,
+      "created_on": string,
+      "modified_by": null,
+      "modified_on": string,
+      "deleted_by": null,
+      "deleted_on": null
+  }
 }
 function AddNote(){
     let user_id=DataService.getData()
@@ -28,7 +47,7 @@ function AddNote(){
           'Authorization': localStorage.getItem("token")
         }
         console.log(header)
-        axios.post(`http://localhost:3000/createNote`,body,{headers:header}).then((res)=>{
+        axios.post(`http://localhost:3000/createNote`,body,{headers:header}).then((res:AxiosResponse<IAddRes>)=>{
             alert("note created successfully")
             navigate("/list");
         }).catch((error)=>{
