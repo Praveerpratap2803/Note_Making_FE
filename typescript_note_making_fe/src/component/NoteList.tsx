@@ -4,19 +4,6 @@ import { useNavigate } from "react-router-dom";
 import NoteCard from "./NoteCard";
 import DataService from "./userid";
 import note from "../interface";
-// type Favorite="Yes"|"No";
-// export interface note{
-//     id:string;
-//     note_message:string;
-//     user_id:string;
-//     favorite:Favorite;
-//     start_date:string|null;
-//     end_date:string|null;
-//     count_edit:number;
-//     count_priority:number;
-//     created_on:Date;
-// }
-
 function NoteList() {
     let userId = DataService.getData();
     let navigate = useNavigate()
