@@ -1,7 +1,7 @@
 import axios from "axios";
 import { ChangeEvent, FormEvent, useEffect, useState,useContext } from "react";
 import note, { Priority1 } from "../interface"
-import DataService, { UserId } from "./userid";
+import  { UserId } from "./userid";
 
 interface INoteCard{
     cardData:note

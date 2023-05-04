@@ -1,8 +1,7 @@
 import { ChangeEvent, FormEvent, useContext, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import axios, {  AxiosResponse } from "axios";
-import DataService, { UserId } from "./userid";
-// import { createContext } from 'react';
+import  { UserId } from "./userid";
 interface loginRes{
     "message": string,
     "data": {
@@ -20,7 +19,6 @@ interface loginRes{
         "deleted_on": string|null
     }
 }
-// const UserId = createContext('');
 function LoginPage(){
 
     
@@ -34,9 +32,8 @@ function LoginPage(){
         console.log(formData);
         try{
             axios.post(`http://localhost:3000/login`,formData).then((res:AxiosResponse<loginRes>)=>{
-                console.log(res.data.data.id);
+                // console.log(res.data.data.id);
                 if(res.status===200){
-                    // const a:any = useContext(UserId)
                     user_id.updateContext(res.data.data.id) 
                     //DataService.setData(res.data.data.id);
                     let token:string = res.data.data.token;
@@ -58,7 +55,6 @@ function LoginPage(){
         setFormData((prevEvent)=>({...prevEvent,password:e.target.value}))
     }
     return (
-        // <UserId.Provider value="1">
             <form action="" onSubmit={formSubmitted}>
                 <label htmlFor="username">Username</label>
                 <input type="text" id="username" name="username" value={formData.username} onChange={(e)=>usernameChanged(e)}/>
@@ -66,8 +62,6 @@ function LoginPage(){
                 <input type="text" id="password" name="password" value={formData.password} onChange={(e)=>passwordChanged(e)}/>
                 <button type="submit">Submit</button>                
             </form>
-        // </UserId.Provider>
     )
 }
 export default LoginPage
-// export {UserId}

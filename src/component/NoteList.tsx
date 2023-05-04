@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState,useEffect, ChangeEvent, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import NoteCard from "./NoteCard";
-import DataService, { UserId } from "./userid";
+import  { UserId } from "./userid";
 import note from "../interface";
 // import { UserId } from "./LoginPage";
 function NoteList() {

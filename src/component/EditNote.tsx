@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from "axios"
 import {useState,useEffect, ChangeEvent, FormEvent, useContext} from 'react';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
-import DataService, { UserId } from "./userid";
+import  { UserId } from "./userid";
 interface IGetNoteByIdRes{
     "message": string,
     "data": {
