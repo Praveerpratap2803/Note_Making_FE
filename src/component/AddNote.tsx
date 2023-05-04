@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
-import { FormEvent, useState } from "react";
+import { FormEvent, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import DataService from "./userid";
+import DataService, { UserId } from "./userid";
 interface IAddNote{
     user_id: string;
     note_message: string;
@@ -26,7 +26,10 @@ interface IAddRes{
   }
 }
 function AddNote(){
-    let user_id=DataService.getData()
+    //using useContext for user id
+    let {user_id} = useContext(UserId)
+    
+    // let user_id=DataService.getData()
     const navigate = useNavigate();
     let [message,setMessage]=useState({note_message:""});
     let clickedCancel = () => {

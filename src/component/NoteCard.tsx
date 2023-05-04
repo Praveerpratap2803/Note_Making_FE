@@ -1,7 +1,7 @@
 import axios from "axios";
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState,useContext } from "react";
 import note, { Priority1 } from "../interface"
-import DataService from "./userid";
+import DataService, { UserId } from "./userid";
 
 interface INoteCard{
     cardData:note
@@ -9,6 +9,10 @@ interface INoteCard{
     edit:(id:string)=>void
 }
 function NoteCard(props:INoteCard){
+
+    //using useContext for user id
+    let {user_id} = useContext(UserId)
+
     let {cardData} = props;
     let formattedCreatedDate = cardData.created_on.split('T')[0];
     let [startValue,setStartValue] = useState(cardData.start_date)
@@ -29,7 +33,7 @@ function NoteCard(props:INoteCard){
         console.log("startSelected");
         let body = {
             note_message:cardData.note_message,
-            user_id:DataService.getData(),
+            user_id:user_id,
             id:cardData.id,
             start_date:e.target.value,
             // end_date:2023-01-01,
@@ -44,7 +48,7 @@ function NoteCard(props:INoteCard){
     let endDateSelected = (e:ChangeEvent<HTMLInputElement>)=>{
         let body = {
             note_message:cardData.note_message,
-            user_id:DataService.getData(),
+            user_id:user_id,
             id:cardData.id,
             // start_date:e.target.value,
             end_date:e.target.value,
@@ -59,7 +63,7 @@ function NoteCard(props:INoteCard){
     let createdDateSelected = (e:ChangeEvent<HTMLInputElement>)=>{
         let body = {
             note_message:cardData.note_message,
-            user_id:DataService.getData(),
+            user_id:user_id,
             id:cardData.id,
             // start_date:e.target.value,
             // end_date:e.target.value,
@@ -111,7 +115,7 @@ function NoteCard(props:INoteCard){
         let body = {
             note_id:cardData.id,
             priority:priorityValue1,
-            user_id:DataService.getData()
+            user_id:user_id
         }
         console.log(body);
         axios.post(`http://localhost:3000/createPriority`,body).then((res)=>{

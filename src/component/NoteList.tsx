@@ -1,11 +1,26 @@
 import axios from "axios";
-import { useState,useEffect, ChangeEvent } from "react";
+import { useState,useEffect, ChangeEvent, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import NoteCard from "./NoteCard";
-import DataService from "./userid";
+import DataService, { UserId } from "./userid";
 import note from "../interface";
+// import { UserId } from "./LoginPage";
 function NoteList() {
-    let userId = DataService.getData();
+  //checking useContext
+  // let a = useContext(UserId)
+  // console.log("use context ",a);
+  // console.log("context hook in notelist",user_id);
+
+
+
+  console.log();
+  
+    //using useContext for user id
+    let {user_id} =useContext(UserId);
+    let userId = user_id;
+
+    //using own service
+    // let userId = DataService.getData();
     let navigate = useNavigate()
     let [notes,setNote] = useState([])
     useEffect(()=>{

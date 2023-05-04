@@ -1,8 +1,8 @@
 import axios, { AxiosResponse } from "axios"
-import {useState,useEffect, ChangeEvent, FormEvent} from 'react';
+import {useState,useEffect, ChangeEvent, FormEvent, useContext} from 'react';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
-import DataService from "./userid";
+import DataService, { UserId } from "./userid";
 interface IGetNoteByIdRes{
     "message": string,
     "data": {
@@ -38,7 +38,11 @@ interface IUpdateNote{
     }
 }
 function EditNote(){
-    let user_id = DataService.getData();
+
+    //using useContext for user id
+    let {user_id} = useContext(UserId)
+
+    // let user_id = DataService.getData();
     const location = useLocation();
     const navigate = useNavigate();
     console.log(location.pathname)
